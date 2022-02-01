@@ -20,10 +20,11 @@ defmodule MiniTwitterWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", MiniTwitterWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", MiniTwitterWeb do
+    pipe_through :api
+
+    resources "/tweets", TweetController, except: [:new, :edit]
+  end
 
   # Enables LiveDashboard only for development
   #
