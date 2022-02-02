@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@db/mini_twitter_prod
+      SECRET_KEY_BASE: WKjCGU1diA5kBrVwdsVI4IBJuyWc2pasYwOhPcLuhdGs843hp+xnnj7NWxFeTDDx
+    ports:
+      - '4000:4001'
+    depends_on:
+      - db
+  db:
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mini_twitter_prod
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - mini_twitter_pgdata:/var/lib/postgresql/data
+volumes:
+  mini_twitter_pgdata:

@@ -1,5 +1,11 @@
 # MiniTwitter
 
+## Setup
+
+```shell
+$ sudo docker-compose up
+```
+
 ## API
 
 ```
