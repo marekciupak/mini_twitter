@@ -79,6 +79,6 @@ $ curl -X GET -H "Accept: application/json" http://localhost:4000/api/tweets
 #### Creating a new tweet
 
 ```shell
-$ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"tweet":{"author":"Jon","message":"Hey!"}}' http://localhost:4000/api/tweets
-{"data":{"author":"Jon","id":"2ae773d1-6899-4738-9b4b-5783e91334d8","message":"Hey!"}}
+$ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"tweet":{"author":{"name":"Elton Jon","email":"jon@elton.local"}, "message":"Hey!"}}' http://localhost:4000/api/tweets
+{"data":{"author":{"email":"jon@elton.local","name":"Elton Jon"},"id":"d71f19bd-42d1-4151-ad1d-0b88e9f61e4d","message":"Hey!"}}
 ```

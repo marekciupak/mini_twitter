@@ -8,7 +8,7 @@ defmodule MiniTwitter.TweetsTest do
 
     import MiniTwitter.TweetsFixtures
 
-    @invalid_attrs %{author: nil, message: nil}
+    @invalid_attrs %{author_email: nil, author_name: nil, message: nil}
 
     test "list_tweets/0 returns all tweets" do
       tweet = tweet_fixture()
@@ -21,10 +21,11 @@ defmodule MiniTwitter.TweetsTest do
     end
 
     test "create_tweet/1 with valid data creates a tweet" do
-      valid_attrs = %{author: "some author", message: "some message"}
+      valid_attrs = %{author_email: "some@author_email", author_name: "some author_name", message: "some message"}
 
       assert {:ok, %Tweet{} = tweet} = Tweets.create_tweet(valid_attrs)
-      assert tweet.author == "some author"
+      assert tweet.author_email == "some@author_email"
+      assert tweet.author_name == "some author_name"
       assert tweet.message == "some message"
     end
 
@@ -34,10 +35,11 @@ defmodule MiniTwitter.TweetsTest do
 
     test "update_tweet/2 with valid data updates the tweet" do
       tweet = tweet_fixture()
-      update_attrs = %{author: "some updated author", message: "some updated message"}
+      update_attrs = %{author_email: "some@updated author_email", author_name: "some updated author_name", message: "some updated message"}
 
       assert {:ok, %Tweet{} = tweet} = Tweets.update_tweet(tweet, update_attrs)
-      assert tweet.author == "some updated author"
+      assert tweet.author_email == "some@updated author_email"
+      assert tweet.author_name == "some updated author_name"
       assert tweet.message == "some updated message"
     end
 

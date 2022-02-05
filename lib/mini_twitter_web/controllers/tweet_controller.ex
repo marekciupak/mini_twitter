@@ -11,7 +11,12 @@ defmodule MiniTwitterWeb.TweetController do
     render(conn, "index.json", tweets: tweets)
   end
 
-  def create(conn, %{"tweet" => tweet_params}) do
+  def create(
+    conn,
+    %{"tweet" => %{"author" => %{"name" => author_name, "email" => author_email}, "message" => message}}
+  ) do
+    tweet_params = %{"author_name" => author_name, "author_email" => author_email, "message" => message}
+
     with {:ok, %Tweet{} = tweet} <- Tweets.create_tweet(tweet_params) do
       conn
       |> put_status(:created)
@@ -25,7 +30,12 @@ defmodule MiniTwitterWeb.TweetController do
     render(conn, "show.json", tweet: tweet)
   end
 
-  def update(conn, %{"id" => id, "tweet" => tweet_params}) do
+  def update(
+    conn,
+    %{"id" => id, "tweet" => %{"author" => %{"name" => author_name, "email" => author_email}, "message" => message}}
+  ) do
+    tweet_params = %{"author_name" => author_name, "author_email" => author_email, "message" => message}
+
     tweet = Tweets.get_tweet!(id)
 
     with {:ok, %Tweet{} = tweet} <- Tweets.update_tweet(tweet, tweet_params) do

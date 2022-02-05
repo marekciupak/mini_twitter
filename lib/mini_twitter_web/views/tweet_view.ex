@@ -13,7 +13,10 @@ defmodule MiniTwitterWeb.TweetView do
   def render("tweet.json", %{tweet: tweet}) do
     %{
       id: tweet.id,
-      author: tweet.author,
+      author: %{
+        name: tweet.author_name,
+        email: tweet.author_email
+      },
       message: tweet.message
     }
   end

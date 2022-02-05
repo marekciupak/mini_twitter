@@ -11,7 +11,8 @@ defmodule MiniTwitter.TweetsFixtures do
     {:ok, tweet} =
       attrs
       |> Enum.into(%{
-        author: "some author",
+        author_email: "some@author_email",
+        author_name: "some author_name",
         message: "some message"
       })
       |> MiniTwitter.Tweets.create_tweet()

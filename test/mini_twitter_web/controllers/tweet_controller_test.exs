@@ -6,14 +6,20 @@ defmodule MiniTwitterWeb.TweetControllerTest do
   alias MiniTwitter.Tweets.Tweet
 
   @create_attrs %{
-    author: "some author",
+    author: %{
+      email: "some@author_email",
+      name: "some author_name"
+    },
     message: "some message"
   }
   @update_attrs %{
-    author: "some updated author",
+    author: %{
+      email: "some@updated_author_email",
+      name: "some updated author_name"
+    },
     message: "some updated message"
   }
-  @invalid_attrs %{author: nil, message: nil}
+  @invalid_attrs %{author: %{email: nil, name: nil}, message: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -35,7 +41,10 @@ defmodule MiniTwitterWeb.TweetControllerTest do
 
       assert %{
                "id" => ^id,
-               "author" => "some author",
+               "author" => %{
+                 "email" => "some@author_email",
+                 "name" => "some author_name"
+               },
                "message" => "some message"
              } = json_response(conn, 200)["data"]
     end
@@ -57,7 +66,10 @@ defmodule MiniTwitterWeb.TweetControllerTest do
 
       assert %{
                "id" => ^id,
-               "author" => "some updated author",
+               "author" => %{
+                 "email" => "some@updated_author_email",
+                 "name" => "some updated author_name"
+               },
                "message" => "some updated message"
              } = json_response(conn, 200)["data"]
     end
